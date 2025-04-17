@@ -3,7 +3,7 @@ Contributors: Qikink
 Donate link: https://qikink.com//
 Tags: POD, DropShipping
 Requires at least: 4.7
-Tested up to: 6.6
+Tested up to: 6.7.2
 Stable tag: 1.0
 Requires PHP: 5.4 and above
 License: GPLv2 or later

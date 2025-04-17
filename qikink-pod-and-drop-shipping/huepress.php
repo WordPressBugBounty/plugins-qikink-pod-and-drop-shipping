@@ -12,15 +12,25 @@
 add_action('admin_enqueue_scripts', 'qikink_my_enqueue');
 
 function qikink_my_enqueue($hook) {
+    // Only load assets on the Qikink admin page
+    if (isset($_GET['page']) && $_GET['page'] === 'qikink') {
+        // Enqueue Bootstrap CSS
+        wp_register_style('prefix_bootstrap', plugins_url('/assets/bootstrap-5.2.3-dist/css/bootstrap.min.css', __FILE__));
+        wp_enqueue_style('prefix_bootstrap');
 
-    wp_register_style('prefix_bootstrap', plugins_url('/assets/bootstrap-5.2.3-dist/css/bootstrap.min.css', __FILE__));
-    wp_enqueue_style('prefix_bootstrap');
-    wp_register_style('local_css', plugins_url('/assets/Qikink.css', __FILE__));
-    wp_enqueue_style('local_css');
-    wp_register_script('huepress-script', plugins_url('/Qikink.js', __FILE__), array('jquery'));
-    wp_enqueue_script('huepress-script', plugins_url('/Qikink.js', __FILE__), array('jquery'));
-    wp_localize_script('huepress-script', 'ajax_object',
-            array('ajax_url' => admin_url('admin-ajax.php'), 'client_id' => 1234));
+        // Enqueue custom CSS
+        wp_register_style('local_css', plugins_url('/assets/Qikink.css', __FILE__));
+        wp_enqueue_style('local_css');
+
+        // Enqueue custom JS with jQuery dependency, loaded in footer
+        wp_enqueue_script('huepress-script', plugins_url('/Qikink.js', __FILE__), array('jquery'), '1.0.2', true);
+
+        // Localize script with AJAX data
+        wp_localize_script('huepress-script', 'ajax_object', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'client_id' => 1234
+        ));
+    }
 }
 
 function qikink_fx_admin_notice_example_activation_hook() {
