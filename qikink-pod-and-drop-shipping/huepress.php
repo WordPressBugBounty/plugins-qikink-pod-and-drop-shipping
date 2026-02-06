@@ -3,7 +3,7 @@
   Plugin Name:  Qikink Print On Demand and DropShipping
   Plugin URI:   https://www.qikink.com
   Description:  A plugin to integrate your woocommerce site with Qikink.
-  Version:      1.0.2
+  Version:      1.1.2
   Author:       Qikink
  */
 
@@ -62,7 +62,7 @@ function qikink_endpoint() {
         'scope' => 'read_write',
         'user_id' => $client_id,
         'return_url' => get_site_url() . '/wp-admin/admin.php?page=qikink',
-        'callback_url' => 'https://dashboard.qikink.com/index.php/Autoc/get_woocommerce_keys'
+        'callback_url' => 'https://fulfilment.qikink.com/index.php/Autoc/get_woocommerce_keys'
     ];
     $query_string = http_build_query($params);
     $url = $store_url . $endpoint . '?' . $query_string;
@@ -99,7 +99,7 @@ function qikink_settings( $links) {
 function get_qikink_email() {
   
     $qikink_email = sanitize_email($_POST['EmailId']);
-    $qikink_url = "https://dashboard.qikink.com/index.php/autoc/wp_plugin";
+    $qikink_url = "https://fulfilment.qikink.com/index.php/autoc/wp_plugin";
 //    $qikink_url = "http://localhost/qikink_elite/index.php/autoc/wp_plugin";
     
     $qikink_params = array(
@@ -134,7 +134,7 @@ function get_qikink_otp() {
    
     $qikink_otp = sanitize_text_field($_POST['otp']);
     $client_id = sanitize_text_field($_POST['client_id']);
-    $qikink_url = "https://dashboard.qikink.com/index.php/autoc/wp_plugin_otp";
+    $qikink_url = "https://fulfilment.qikink.com/index.php/autoc/wp_plugin_otp";
 //    $qikink_url = "http://localhost/qikink_elite/index.php/autoc/wp_plugin_otp";
     $qikink_params = array(
         "otp" => $qikink_otp,
@@ -163,7 +163,7 @@ function get_qikink_otp() {
 function qikink_woo_menu_signin() {
     remove_menu_page('Adminmenu');
   
-        $qikink_url = "https://dashboard.qikink.com/index.php/autoc/check_install";
+        $qikink_url = "https://fulfilment.qikink.com/index.php/autoc/check_install";
 //        $qikink_url = "http://localhost/qikink_elite/index.php/autoc/check_install";
         $qikink_params = array(
             "Store_URL" => get_site_url()
@@ -207,7 +207,7 @@ function qikink_encryptor($qikink_params){
 
 function delete_plugin_data(){
     //        $qikink_url = "https://qikink.com/erp2/index.php/autoc/check_install";
-        $qikink_url = "https://dashboard.qikink.com/index.php/autoc/wordpress_uninstall";
+        $qikink_url = "https://fulfilment.qikink.com/index.php/autoc/wordpress_uninstall";
         $qikink_params = array(
             "Store_URL" => get_site_url()
         );
